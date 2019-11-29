@@ -221,8 +221,39 @@ head(st)
 class(st)
 dim( st )       #관측치 50개 변수 8개 
 
+head(st)   #Population가 변수 
+Population #attach는 내가 변수이름을 직접 입력 원할 때 
+attach(st) #변수 하나는 벡터 하나 
+Population
+detach (st) #attach 실행취소 
+Population
+
 
 iris.m <- as.matrix(iris[ , 1:4])  #데이터프레임의 1부터 4까지를 매트릭스로 변환 
 head( iris.m)                      #as함수는 변환
 class ( iris.m)
-str( iris.m ) #150행 4열 
+str( iris.m )        #150행 4열 
+
+#CSV File 내용읽기
+
+setwd("C:/learnR")  #경로지정할 때에는 슬래시
+air <- read.csv("airquality.csv",header = T)  #header:첫줄을 말머리 지정여부  
+
+class(air)
+dim(air)  #관측치8개 변수6개 
+str(air)  #구조 파악
+head(air)
+tail(air)
+
+
+name <- c("Hong","Kim", "Lee")
+age <-  c(22,20,25)
+gender = factor( c ("M","F","M"))
+blood.type =factor(c ( "A", "O" , "B"))
+person.info <- data.frame( name, age, gender, blood.type)
+person.info 
+
+
+setwd("C:/learnR")  
+air <- write.csv(person.info, "person_info.csv",row.names = F)
+
