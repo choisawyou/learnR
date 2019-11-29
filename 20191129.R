@@ -201,3 +201,28 @@ b-a
 b / a
 a * b
 
+#Matrix/Data frame 자료구조 확인/변환
+
+class ( iris )   #자료형이 matrix or data.frame인지
+str(iris)
+
+class ( state.x77 )  # 자료형에 따라 str의 결과가 다르게 나옴 
+str( state.x77 )   #matrix 경우 str : 자료형, 행과열 정보, 데이터 내용
+
+
+is.matrix ( iris)    #is 함수는 결과값 항상 논리값
+is.data.frame ( iris)
+is.matrix(state.x77)
+is.data.frame( state.x77)
+
+st <- data.frame ( state.x77)  
+str(st)         # 매트릭스에서 데이터프레임으로 변환
+head(st)        
+class(st)
+dim( st )       #관측치 50개 변수 8개 
+
+
+iris.m <- as.matrix(iris[ , 1:4])  #데이터프레임의 1부터 4까지를 매트릭스로 변환 
+head( iris.m)                      #as함수는 변환
+class ( iris.m)
+str( iris.m ) #150행 4열 
