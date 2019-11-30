@@ -104,7 +104,46 @@ st
 #결빙일수(Frost)가 120 이상인 주의 정보 출력
   st.2 <- subset(st,Area>=100000 & Frost>=120)
   st.2
+#17. 인구(Population)가 2,000 미만이고, 
+#범죄율(Murder)이 12미만인 주의 정보 출력
+ 
+st.3 <- subset(st,Population<2000 & Murder <12)
+st.3
   
-#17. 인구(Population)가 2,000 미만이고, 범죄율(Murder)이 12미만인 주의 정보 출력
-  
-  
+#  18. 문맹률(Illiteracy)이 2.0 이상인 주의 
+#평균 수입은 얼마인지 출력
+
+st.4 <- subset(st,Illiteracy>=2.0)
+st.4
+st.5 <- st.4[ , "Income"]
+st.5
+mean(st.5)
+
+#  19. 문맹률(Illiteracy)이 2.0 미만인 주와 
+#2.0 이상인 주의 평균 수입의 차이 출력
+
+st.6 <- subset(st,Illiteracy<2.0)
+st.6income <- st.6[ ,"Income"]
+st.6income
+
+st.7 <- subset(st,Illiteracy>=2.0)
+st.7income <- st.7[ ,"Income"]
+st.7income
+
+abs(mean(st.6income)-mean(st.7income))
+
+#  20. 기대수명(Life.Exp)이 가장 높은 주는 어디인지 출력
+head(st)
+attach(st)
+Life.Exp
+high.le <- max(Life.Exp)
+
+subset(st,Life.Exp == high.le)
+
+#  21 Pennsylvania 주보다 수입(Income)이 높은 주들 출력
+
+class(state.x77)
+st <- data.frame(state.x77)
+high.ic <- st[Pennsylvania,Income]
+
+subset(st,Income>= high.ic)
