@@ -147,3 +147,36 @@ st <- data.frame(state.x77)
 high.ic <- st[Pennsylvania,Income]
 
 subset(st,Income>= high.ic)
+
+#문3)
+#R에서 제공하는 mtcars 데이터셋은 자동차 모델에 대한
+#제원 정보를 담고 있다.
+
+#1. 이 데이터셋의 자료구조 출력
+class(mtcars)
+
+#2. 이 데이터셋의 행의 개수와 열의 개수 출력
+dim(mtcars)
+
+#3. 이 데이터셋 열들의 자료형 출력
+str(mtcars)
+
+
+#4. 연비(mpg)가 가장 좋은 자동차 모델 출력
+attach(mtcars)
+max.mtcars <- max(mpg)
+subset(mtcars,mpg == max.mtcars)
+
+#5. gear가 4인 자동차 모델 중 연비가 가장 낮은 모델 출력
+gear.4 <- subset(mtcars,gear == 4)
+gear.4
+low.mpg <- min(gear.4$mpg)
+subset(gear.4,mpg == low.mpg )
+
+#6. Honda Civic의 연비(mpg)와 gear 수 출력
+mtcars["Honda Civic",c("mpg","gear")]
+
+#7. Pontiac Firebird 보다 연비가 좋은 자동차 모델 출력
+#8. 자동차 모델들의 평균 연비 출력
+#9. gear의 수 종류 출력
+
