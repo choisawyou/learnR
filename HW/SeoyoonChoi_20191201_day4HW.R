@@ -177,6 +177,60 @@ subset(gear.4,mpg == low.mpg )
 mtcars["Honda Civic",c("mpg","gear")]
 
 #7. Pontiac Firebird 보다 연비가 좋은 자동차 모델 출력
-#8. 자동차 모델들의 평균 연비 출력
-#9. gear의 수 종류 출력
+pfm <- mtcars["Pontiac Firebird",c("mpg")]    
+subset(mtcars,mpg > pfm)
 
+
+#8. 자동차 모델들의 평균 연비 출력
+mean(mtcars$mpg)
+
+#9. gear의 수 종류 출력★
+table(mtcars[ ,"gear"])
+
+#문4)
+#R에서 제공하는 airquality 데이터셋은 일별로 대기의 질을 측정한 정보를 담고 있다.
+
+airquality
+
+#1. 이 데이터셋의 자료구조 출력
+class(airquality)
+
+#2. 이 데이터셋의 앞쪽 일부분 내용만 출력
+head(airquality)
+
+#3. 기온(Temp)이 가장 높은 날은 언제인지 월(Month)과 일(Day) 출력
+max.temp <- max(Temp)
+max.temp
+max.temp1 <- subset(airquality,Temp == max.temp)
+
+max.temp1[,c("Month","Day")]
+
+#4. 6월달에 발생한 가장 강한 바람(Wind)의 세기 출력
+june <- subset(airquality,Month == 6)
+max(june$Wind)
+
+#5. 7월 달의 평균 기온(Temp) 출력
+
+ july <- subset(airquality, Month == 7)
+ mean(july$Temp)
+
+
+#6. 오존(Ozone) 농도가 100을 넘는 날은 며칠이나 되는지 출력
+ 
+ ozone <- subset(airquality, Ozone > 100)
+length(ozone)
+
+
+#문5)
+#1. R에서 제공하는 state.x77 데이터셋에서 수입(Income)이 5,000 이상인 
+#주의 데이터에서 수입(Income), 인구(Population), 면적(Area) 열의 값들만
+#추출하여 rich_state.csv에 저장
+
+class(state.x77)
+st <- data.frame(state.x77)
+class(st)
+st.1 <- subset(st,Income >= 5000)
+rich_state <- st.1[ ,c("Income","Population","Area")]
+rich_state
+
+#2. 1.에서 만든 rich_state.csv파일을 읽어서 ds 변수에 저장한 후 ds 내용 출력
