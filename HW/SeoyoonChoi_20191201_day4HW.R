@@ -230,7 +230,10 @@ class(state.x77)
 st <- data.frame(state.x77)
 class(st)
 st.1 <- subset(st,Income >= 5000)
-rich_state <- st.1[ ,c("Income","Population","Area")]
-rich_state
+rich.st <- st.1[ ,c("Income","Population","Area")]
+rich.st
+
+setwd("C:/Bigdata Maestro/learnR")
+rich_state.csv <- write.csv(rich.st,"rich_state.csv",row.names = F)
 
 #2. 1.에서 만든 rich_state.csv파일을 읽어서 ds 변수에 저장한 후 ds 내용 출력
