@@ -119,7 +119,7 @@ st.5 <- st.4[ , "Income"]
 st.5
 mean(st.5)
 
-#  19. 문맹률(Illiteracy)이 2.0 미만인 주와 
+# 19. 문맹률(Illiteracy)이 2.0 미만인 주와 
 #2.0 이상인 주의 평균 수입의 차이 출력
 
 st.6 <- subset(st,Illiteracy<2.0)
