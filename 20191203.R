@@ -34,7 +34,7 @@ head( target )
 pairs( target, main = "multi plots")  #대각선을 중심으로 대칭관계 _ x,y축이 변경된 상태 
 
 #산점도 만드는 4가지 방법 _ 이변량
-
+y축~x축
 wt <- mtcars$wt
 mpg <- mtcars$mpg
 plot( wt,mpg , main = " 중량 - 연비 그래프" , xlab = "중량 ", 
