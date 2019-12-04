@@ -86,12 +86,19 @@ AQ2 <- AQ[ , AQ %in% NA] <- mean(AQ %in% NA)
 
 AQ2
 
+AQ[ ,AQ %in% NA] <- AQ
+
 #문4)
 #R에서 제공하는 state.x77 데이터셋에 대하여 다음 문제를 해결하기 위한
 #R 코드를 작성하시오.
 
 #(1) state.x77 데이터셋을 Population(인구수)를 기준으로 오름차순 정렬하시오.
+class(state.x77)
+
+state.x77[order(state.x77$Population), ]
+
 #(2) state.x77 데이터셋을 Income(소득)을 기준으로 내림차순 정렬하시오.
+
 #(3) Illiteracy(문맹률)가 낮은 상위 10개 주의 이름과 문맹률을 출력하시오.	
 
 #문5)
