@@ -89,10 +89,25 @@ AQ2
 #문4)
 #R에서 제공하는 state.x77 데이터셋에 대하여 다음 문제를 해결하기 위한
 #R 코드를 작성하시오.
+class(state.x77)
+st <- data.frame(state.x77)
 
+class(st)
 #(1) state.x77 데이터셋을 Population(인구수)를 기준으로 오름차순 정렬하시오.
+
+state.x77[order(st$Population),] #matrix를 dataframe으로 바꾼 후 실행
+
+# 매트릭스를 정렬하는 방법이 있을까?
+
 #(2) state.x77 데이터셋을 Income(소득)을 기준으로 내림차순 정렬하시오.
+state.x77[order(st$Income,decreasing = T),]
+
 #(3) Illiteracy(문맹률)가 낮은 상위 10개 주의 이름과 문맹률을 출력하시오.	
+
+x <- state.x77[order(st$Illiteracy),]
+class(x) #matrix
+x.1 <- data.frame(x)
+x.1
 
 #문5)
 #R에서 제공하는 mtcars 데이터셋에 대하여 다음 문제를 해결하기 위한 R
@@ -100,10 +115,30 @@ AQ2
 
 #(1) mtcars 데이터셋을 gear(기어)의 개수에 따라 그룹을 나누어 mt.gear에 저장하
 #시오.(단, split() 함수를 사용)
-#(2) mt.gear에서 gear(기어)의 개수가 4인 그룹의 데이터를 출력하시오.
+class(mtcars)
+
+mt.gear <- split(mtcars,mtcars$gear)
+mt.gear
+class(mt.gear)
+
+#2) mt.gear에서 gear(기어)의 개수가 4인 그룹의 데이터를 출력하시오.
+mt.gear$"4"
+
 #(3) mt.gear에서 gear(기어)의 개수가 3인 그룹과 5인 그룹의 데이터를 합쳐서
 #mt.gear.35에 저장하고 내용을 출력하시오.
+
+mt.3 <- mt.gear$"3"
+mt.3                                          
+                                             
+mt.5 <- mt.gear$"5"
+                                            
+mt.gear.35 <- merge(mt.3,mt.5,all = T)
+
+mt.gear.35
+ 
 #(4) mtcars 데이터셋에서 wt(중량)가 1.5~3.0 사이인 행들을 추출하여 출력하시오.
+
+mtcars %>% filter(wt>= 1.5 & wt < 3.0)
 
 #문6)
 #다음의 문제를 해결하기 위한 R코드를 작성하시오.
@@ -114,6 +149,9 @@ AQ2
 authors <- data.frame( surname = c( "Twein", "Venables", "Tierney", "Ripley", "McNeil" ),
                        nationality = c( "US", "Australia", "US", "UK", "Australia" ),
                        retired = c( "yes", rep( "no", 4 ) ) )
+
+class(authors)
+
 books <- data.frame( name = c( "Johns", "Venables", "Tierney", "Ripley", "Ripley", "McNeil" ),
                      title = c( "Exploratory Data Analysis", 
                                 "Modern Applied Statistics ...",
@@ -122,11 +160,20 @@ books <- data.frame( name = c( "Johns", "Venables", "Tierney", "Ripley", "Ripley
                                 "Interactive Data Analysis" ),
                      other.author = c( NA, "Ripley", NA, NA, NA, NA ) )
 
+books
+authors
+
 #(1) surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하시오(두						   
 #데이터프레임에서 공통 열의 값이 일치하는 것들만 병합).
+
+merge(authors,books,by.x = c("surname"),by.y = c("name"))
+
 #(2) surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하되
 #authors의 행들이 모두 표시되도록 하시오.
+merge(authors,books,all.x = T)
 #(3) surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하되 books
 #의 행들은 모두 표시되도록 하시오.
-#(4) surname과 other.author를 공통 열로 하여 authors와 books를 병합하여 출력하
+merge(authors,books,all.y = T)
+#(4) surname과 other.author를 공통 열로 하여 yauthors와 books를 병합하여 출력하
 #시오.	
+merge(authors,books,by.x = c("surname"),by.y = c("other.author"))
