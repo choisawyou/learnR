@@ -16,7 +16,7 @@ par(mfrow = c (1,1))
 # 다변량 , 이변량 =>  Matrix / Data frame
 
 # 연속형 + 다변량 => 1. 상관분석_ 산점도 사용
-#                    2.시계열 data분석 ( x축 : 시간) _ 선그래프 
+#                    2. 시계열 data분석 ( x축 : 시간) _ 선그래프 
 
 ##중량과 연비의 관계(이변량) _ 중량이 무거우면 연비가 내려갈까? 
 wt <- mtcars$wt
@@ -106,7 +106,7 @@ late <- c(5,8,7,9,4,6,12,13,8,6,6,4)
 #type : 선그래프의 모양/lty: 선의 모양 / lwd : 선의 두께
 
 plot( month,late, main = "지각생 통계", type = "l",lty = 1 , lwd = 1,
-      xlab = 'Month', ylab = " late cnt")
+      xlab = 'Month', ylab = "late cnt")
 
 plot( month,late, main = "지각생 통계", type = "b",lty = 1 , lwd = 1,
       xlab = 'Month', ylab = " late cnt")
@@ -115,7 +115,7 @@ plot( month,late, main = "지각생 통계", type = "o",lty = 1 , lwd = 1,
       xlab = 'Month', ylab = " late cnt")
 
 plot( month,late, main = "지각생 통계", type = "s",lty = 1 , lwd = 1,
-      xlab = 'Month', ylab = " late cnt")
+      xlab = "Month', ylab = " late cnt")'
 
 
 # 복수의 선 그래프 
@@ -127,7 +127,7 @@ late2 <- c(4,6,5,8,7,8,10,11,6,5,7,3)
 #ylim(최소값,최대값) 축 범위 설정 
 
   plot(month,late1, main = "지각생 통계", type = "b",lty = 1 , col = "red",
-      xlab = 'Month', ylab = " late cnt", ylim = c ( 1, 15)) 
+      xlab = "Month", ylab = " late cnt", ylim = c ( 1, 15)) 
 lines( month, late2, type = "b", col = "blue")   #lines 함수를 이용하여 선그래프 추가 
 
 
