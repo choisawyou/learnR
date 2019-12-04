@@ -103,7 +103,7 @@ cor(iris[ , 1:4 ]) #다변량 상관계수
 month <-  1:12
 late <- c(5,8,7,9,4,6,12,13,8,6,6,4)
 
-#type : 선그래프의 모양/lty: 선의 모양 / lwd : 선의 두께
+#type : 선그래프의 모양/lty(line type): 선의 모양 / lwd : 선의 두께
 
 plot( month,late, main = "지각생 통계", type = "l",lty = 1 , lwd = 1,
       xlab = 'Month', ylab = "late cnt")
