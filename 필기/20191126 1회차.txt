@@ -1,0 +1,163 @@
+2019/11/26 - 1회차
+R은 패키지 성격 ^
+복습 위주
+컴퓨터 구조/원리
+GIT                                                
+
+컴퓨터 시스템
+1.하드웨어
+1)CPU_ALU,Register,CU로 구성
+  > ALU(연산{+-x >=<}장치 ), Register → CU(제어장치)
+
+*CPU명령 Cycle*
+명령 Fetch (Memory에서data읽기) > 명령 Decode(명령해석) > 명령 Excute
+
+2)Memory(RAM/ROM)_code&data로 이루어짐
+RAM 전원을 끄면 다 사라짐
+ROM 전원에 상관없이 저장_RAM대비 상대적으로 느린속도
+3)I/O(in/out put) Device
+eg) 스마트폰의 터치,스피커,마이크,볼륨버튼,
+     냉장고 상태 표시 스크린, TV 화면 등
+
+연결상태 및 과정
+* CPU↔Memory→I/O Device _ CPU와 I/O DEVICE 는 직접 x
+eg) 2+5 에서 '2,5'는 data / '+' 는 code
+
+
+2.소프트웨어
+1)시스템 S/W_하드웨어 제어 관점
+2)어플리케이션 S/W_사용자(End-user)관점
+   >요새는 UI 보다 UX의 중요성 ^
+
+
+*1bit (0/off or 1/on) X 8 = 8bit => 1 byte (컴퓨터 최소 표현단위)
+1byte로 표현 가능 종류는 256가지(2의 8승)
+컴퓨터는 0과 1만 알기 때문에 code표(protocol_약속) 필요
+대표적인 코드표는 ASCII_8bit / UNIcode_2byte / UTF 8_글자 표현방식(한글 깨질 확률↓)
+
+Operating system (운영체제)
+ >H/W(cpu,memory,i/o device) 제어
+
+*메모리 접근 절차*★
+1.메모리 주소 지정(숫자 부여)_Address Bus
+2.동작 결정(read or write)_Control Bus
+3.Data/Code를 결정된 동작으로 수행_Data Bus
+
+CPU 와 Memory를 연결하는 선을 BUS라고 함
+1.Address Bus
+2.Data Bus
+3.Control Bus
+높은 bit를 쓸 수록 속도가 ^ ( 연결하는 선이 많아지므로!)
+32bit CPU는 4GB가 한계
+
+1차 Memory(main Memory)_보관,실행 모두 가능
+2차 Memory(보조 Memory) _only 보관기능, 소멸x
+>USB,HDD,SDD
+File: 보조메모리에 저장하는 단위
+2차메모리를 1차메모리로 가져와야함
+반드시 보조기억장치가 있어야 컴퓨터가 작동 
+
+*Version Control System (VCS_버전관리시스템)*
+Server(service 제공자)
+Client(service 요청자)
+
+1.중앙집중식(SVN,CVS)
+Client가 작업한것을 Server에 저장하고,필요할 때 불러다 씀
+장점: 서버만 잘 구성하면 됨
+단점:서버에 문제가 생기면 클라이언트는 아무것도 못함
+2.분산식(Git_GitHub{협업서버역할})
+Client 각자 VCS 운영, 필요할 때 Client끼리
+연결하거나 한군데로만 연결
+장점:필요할 때 연결하기만 하면되고 내가 했던 기록이 남음
+단점:각자 VCS를 운영해야하는부분 
+
+
+확장자 => 드라이브>좌측상단 파일> 폴더및검색옵셥>보기탭>확장자,드라이브체크표시해제
+exe/msi은 실행가능 file
+이외에는 더블클릭시 실행 불가
+
+cf) C:\Program Files\Git
+[C드라이브/루트/프로그램파일s/밑에,아래/깃]
+Users에는 프로그램 설치 x 
+
+git : https://git-scm.com/
+
+Git Editor_ 
+Vim 은 리눅스용 (단축키알아야함)_설치x
+Use Visual Studio Code as Git's default editor 설치하기
+>명령프롬프트 cmd 실행 후
+>git --version
+
+CLI(Command Line Interface) 명령을 입력하는 방식
+cmd가 환경구성
+
+글씨체 링크
+https://sourcefoundry.org/hack/
+https://github.com/naver/d2codingfont
+
+c: 드라이브를 c로 변경
+cd\ => 디렉터리 변경
+dir /w=> 현재디렉터리를 간략하게보여줘 명령
+명령/옵션
+
+git 이용한 version 관리 절차
+1. 관리할 디렉터리에서 
+git init  : 초기화
+
+2.버전 관리할 대상 추가
+git add [file명] : 추가
+
+git status : 상태확인
+
+3. 커밋 수행
+git commit -m "설명"
+
+https://github.com/
+https://desktop.github.com/
+
+*Blockchain_Big data*
+
+빅데이터 참고자료
+- https://ko.wikipedia.org/wiki/빅_데이터 
+- https://m.blog.naver.com 데이터마이닝 포스트 
+- 따라하며 배우는 데이터 과학(권재명 지음) - Jpub
+
+ *Program language 유형*
+
+1.Compile방식
+장점: 실행속도가 빠름
+단점: 변경할 경우에는 통째로 변경해야함.환경구축 복잡
+2.Interpreter 방식(Script형태)
+대표eg.Web , R
+장점:간편하다
+단점:실행속도가 느리다
+
+1단계 :Source Code(Source File)
+ >Editor 이용
+2단계 : Object Code
+>Complier 이용 
+3단계 : Execute Code
+>Execute file
+4단계 : 결과
+
+Compile 단계별 사용 프로그램
+1-2 = Complier
+2-3 = Linker
+3-결과 = Loader
+
+단계별 생성 파일
+1 = Source file
+2 = Object file_실행 불가능한 binary file
+3 = Execute file _실행 가능한 binary file
+
+단계별 발생 Error: 
+1-2 = Syntax error
+2-3 = Link error
+결과 = Runtime error 
+
+*R은*
+1. Interpreter 방식
+2. Open source
+-강제 소스 오픈 GPL,LGPL/
+-APL,MPL,BSD
+3.시장모델_ 누구든 참여가능

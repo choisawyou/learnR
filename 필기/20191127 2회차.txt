@@ -1,0 +1,413 @@
+2019/11/27 - 2회차
+42pg/114pg/115pg ~122pg
+
+hw: 1~1000까지 3의 배수와 5의 배수를 한줄에
+10개씩 출력하고 마지막에 개수를 출력
+
+*개발언어 교육과정
+1.개발환경_R(Interpreter),Rstudio(IDE_통합개발환경)
+2.★자료형(변수)★
+3.연산자
+4.제어문
+-Library(알고리즘{일처리순서}+자료구조)
+1)제공되는 Library(사용방법)
+2)사용자 정의 Library(작성)*
+>함수
+>Class
+5.입/출력
+
+*알고리즘(메모리 내용을 어떻게 바꿀것인가) 필요조건
+1.유한성_모든 프로그램은 '끝'나야한다
+2.0개 이상의 입력(Memory기록)_입력이 0일 수 있다
+3.1개 이상의 출력(Memory내용출력)_출력은 반드시 有
+4.유효성_유효한 알고리즘 
+5.효과성
+
+*Data type(자료형)
+R_원시 자료형(Scalar)_가장 낮은 타입의 형태
+ >컴퓨터 시스템에서 사용하는 Data type
+숫자/문자 구분 기준: 산술 연산 가능 유무
+eg.휴대폰 번호는 숫자이지만 산술연산X
+1.숫자
+-정수
+-실수_나눠서 나머지가  0이 아님
+2.문자
+3.논리형 (True or False)
+
+*git:version 관리 tool
+1.local영역version 관리(나혼자)
+>git
+2.global영역 version관리(타인과 공유)
+>git/github
+
+*Repository(git의 저장소)
+https://github.com/choisawyou/WorkR.git
+긴명령 or drag해서 repository에 파일 올릴 수 있다 
+파일 크기제한 하나당 25MB이하
+
+*git 만들기(cmd로)
+1.git 초기화(1회성)
+>git init /C:\workR>git init
+2.file 추가
+>git add [file명] file명은 = .으로 대체가능
+3.commit
+>git commit -m" create to file [file명]"
+
+cmd에서 처음 1번만하기 _이메일은 깃허브 상 이메일, 아이디
+C:\workR>git config --global user.email"choisawyou@gmail.com"
+C:\workR>git config --global user.name "choisawayou"
+
+C:\workR>git status _ 상태확인
+C:\workR>git add first.R
+C:\workR>git commit -m "create to file [first.R]"
+C:\workR>git log_사용이력
+
+github desktop  
+
+R에서 왼쪽 알트 + [-] =<-
+C:\workR>git add first.R
+
+C:\workR>git commit -m "add to line [ number <- 10 ]"
+
+C:\workR>git remote add origin https://github.com/choisawyou/WorkR.git
+>  로컬과깃허브의 저장소를 연결
+C:\workR>git push -u origin master
+>푸시해서 올리기
+
+
+*변수 : 값을 저장/변경하는 기억장소
+ ★★★변수의 기능★ ★★
+1.값 쓰기 _L value_값의 변환
+2.값 읽기_R value_값의 변환 X
+치환연산자 기준
+왼쪽 : L value
+오른쪽 : R value
+eg.
+{number<-10}
+변수이름:number
+치환연산자: <- or =
+값:10
+
+*변수
+1.속성(attribute)_기억장소 모양
+1.1 자료형(data type)_숫자 , 문자 등★
+1.2 기억장소크기_ R이 알아서 만들어줌(통상 정수 4byte)
+1.3 값 저장방식_R이 알아서
+eg)32bit 중 첫 bit는 부호 (+:0,-:1)
+1.4  값의 범위_R이 알아서
+>overflow,underflow : 값의 범위 초과 및 미달의 에러
+2.연산(기능,동작)_기억장소 이용/변경 동작
+2.1 읽기 기능
+-R value
+-출력명령
+2.2 쓰기 기능
+-L value
+-입력명령
+2.3 산술/관계/논리 연산(operator)_기호형태
+
+-산술(사칙연산)
+>결과값 : 숫자
+-관계(대소비교)
+>결과값 : 논리형
+-논리(또는/그리고)
+>결과값 : 논리형
+
+
+변수 생성 방법
+-정적 자료형으로 생성_변경x
+> complie형 언어(c,c++,java)
+-동적 자료형으로 생성_필요에의해 변경 가능
+>interpreter(script)형 언어(R,python,js)
+
+*program
+1.기억장소 확보
+2.기억장소 내용을 알고리즘에 따라
+읽기/쓰기하여 결과 도출 
+
+
+*Rstudio
+numberValue <- 1   #camel 표기법(소+대문자)
+str_value <- "R Language"   #snake 표기법(언더바)
+booleanvalue <- TRUE #소문자표기법
+변수명의 시작은 숫자로 시작 불가 & 소문자로시작
+내가 원하는 표기법 선택
+R은 대소문자 구별.
+
+print( numberValue)
+print( str_value)
+print( booleanvalue)
+
+cat( "Numeric number : ", numberValue, "\n")
+cat( "String : ", str_value,"\n" )
+cat( "Blooean value : ",booleanvalue, "\n")
+Escape chatacter
+\n :줄바꿈
+\+ :tab 간격
+
+numberValue <- scan()
+cat( "Numeric number :", numberValue, "\n")
+
+print/cat 읽는함수_출력명령
+scan 쓰기함수_입력명령
+
+number1 <- 10
+number2 <- 20
+resultAdd <- number1 + number2
+resultSub <- number1 - number2
+resultMul <- number1 * number2
+resultDiv <- number1 / number2
+resultRem <- number2%% number1
+resultSec <- number2 ^ 5
+> print( resultAdd )
+[1] 30
+> print( resultSub)
+[1] -10
+> print( resultMul)
+[1] 200
+> print( resultDiv)
+[1] 0.5
+> print( resultRem)
+[1] 0
+> print( resultSec)
+[1] 3200000
+
+number1 <- 0
+number1 <- number1 + 10   => 누적 ( 동일 변수가 L/R  value에 존재_기존내용 보존)
+number1
+상위경우에는 [연산 우선순위]에 따라 Rvalue 먼저 계산
+동순위의 연산자(곱셈 나눗셈 등)의 경우
+
+cf) 
+number1 <- number1 + 10 => 누적 ( 동일 변수가 L/R  value에 존재_기존내용 보존)
+number1 <- number2 + 10 는 치환  ( 기존 내용은 지워짐 )
+누적할 때에는 필수로 초기값 설정
+
+*관계연산자*
+(대소비교)
+number1 <- 10.5
+number2 <- 10
+
+> number1 <- 10.5
+> number2 <- 10
+> print ( number1 > number2 )
+[1] TRUE
+> print ( number1 >= number2 )
+[1] TRUE
+> print ( number1 < number2 )
+[1] FALSE
+> print ( number1 <= number2 )
+[1] FALSE
+> print ( number1 == number2 )
+[1] FALSE
+> print ( number1 != number2 ) = > 같지않다
+[1] TRUE
+
+(논리연산)
+print ( number1 > 10 & number2 >10 )     #AND
+print ( number1 > 10 | number2 > 10 )    #OR
+print ( !( number1 > 10 ) )              #NOT
+
+number <- "100"
+str <- "R Language"
+result = number + str
+print ( result )
+>>Error in number + str : 이항연산자에 수치가 아닌 인수입니다
+
+
+*제어구조 : program 실행 흐름을 제어
+-순차구조: 명령어 차례대로 나열(명령 흐름은 위에서 아래 방향으로 흐른다)
+-선택구조: if ~ else 문 사용=> 괄호必안에 조건식 必
+-반복구조: for,while
+
+#
+#제어구조 - 선택구조
+#
+1.양자택일 구조 (if~else)
+job.type <- 'A'
+
+if ( job.type == 'b') {
+  bonus <- 200              #참일때
+  } else {                        #조건이 거짓일때
+   bonus <- 100 
+}
+cat ( "job type :", job.type, "\t\tbonus : ", bonus )
+job type : A 		bonus :  100
+
+2. 단순구조(if)
+
+job.type <- 'B'
+if  ( job.type == 'A') {
+  bonus <- 200
+}
+cat ( "job type : ", job.type, "\t\tbonus :", bonus )
+job type :  B 		bonus : 100
+
+3.다중선택구조 (if ~ else if~ else~)_조건문의 순서가 중요 !
+score <- 85
+if (score >= 90 ) {
+  grade = 'A' 
+}  else if ( score >= 80 ) {
+  grade <- 'B'
+} else if ( score >= 70 ){
+grade <- 'C'
+} else if ( score >= 60 ) {
+   grade <- 'D'
+} else {
+  grade <- 'F'
+}
+cat ( "score : ", score, "\t\tgrade :" , grade)
+score :  85 		grade : B
+
+연습문제_짝홀수 판단
+
+number <- 15
+
+#remainder <- number %% 2
+#if ( remainder == 0)
+
+if ( number %% 2 == 0 ) {
+  result <- "짝수"
+} else {
+  result <- "홀수"
+  } 
+cat ( "Number : ", number, "는 " , result ,"이다" )
+Number :  15 는  홀수 이다
+
+
+==================================
+ a <- 10
+ b <- 20
+ 
+ if ( a > 5 & b > 5 ) {
+   cat ( a, " > 5 and ", b, "> 5 " )
+} else {
+ cat( a, " <= 5 or " , b, " <= 5 " )
+   }
+
+==================================
+a <- 10
+b <- 20
+  
+ if ( a > b ) {
+   c <- a
+ } else {
+   c <- b
+ }
+ cat("a = ", a, "\tb = ", b, "\tc = ", c )
+  
+ c <- ifelse( a > b, a, b )
+ cat( "a = ", a, "\tb = ", b, "\tc = ", c )
+ 
+========================================
+
+Package ; 함수 library 집합
+
+ 
+ #제일 큰 수를 max에 저장 후 max를 출력
+ 
+ a <- 10
+ b <- 5
+ c <- 8
+max <- a
+
+if ( b > max ) {
+  max = b
+} 
+
+if ( c > max ) {
+  max = c 
+}
+
+cat( " a = ", a, " b = ", b, " c = ", c, " max = ", max )
+
+
+
+#반복구조
+#for 문_범위가 명확할 때 사용
+
+for ( i in 1:10 ) {
+  print( i )
+}
+
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+
+for ( 반복 1회 째의 내용이 저장  in  반복범위 시작 : 반복범위 끝 )
+
+multiple = 2
+for ( i in 2:9 ) {
+  cat( multiple, 'X', i, ' = ', multiple *i, '\n' )
+}
+2 X 2  =  4 
+2 X 3  =  6 
+2 X 4  =  8 
+2 X 5  =  10 
+2 X 6  =  12 
+2 X 7  =  14 
+2 X 8  =  16 
+2 X 9  =  18 
+
+#while문_ 반복 제어변수(i) 반드시 설정__ 범위가 애매할때 
+
+i <- 1
+while ( i <= 10 ) {
+  print( i )
+  i <- i + 1
+}
+
+#1-100까지 한줄에 10개씩 출력 
+
+#1 #Reset
+for (s in 1:100) {
+  cat( s,' ' )
+  if ( s %% 10 == 0 ) {
+    print( '\n' )
+  }   
+}
+
+#2 #초기화
+lineCount <- 1
+for ( i in 1:100 ){
+  cat(i, ' ')
+  lineCount <- lineCount + 1
+  if ( lineCount > 10 ) {
+    print( '\n')
+    lineCount <-1
+  }
+}  
+
+
+Keyword = Reserved word => 예약어
+User Define word => 사용자 정의어
+
+{} ←code block
+\t← tab 간격만큼 띄어쓰기
+
+
+hw: 1~1000까지 3의 배수와 5의 배수를 한줄에
+10개씩 출력하고 마지막에 개수를 출력
+
+
+linecount<-1
+count<-1
+
+for ( i in 1:1000){
+   if( i %% 3 == 0 | i %% 5 == 0 )
+        cat(i , " ")
+   count <- count + 1 
+   linecount <- linecount +1
+    if ( linecount > 21 ) {
+      print("\n")
+        linecount <- 1 
+    }
+}
+
+cat ("총 갯수 : ", count , "개")

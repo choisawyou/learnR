@@ -1,0 +1,466 @@
+2019/11/28- 3회차
+122pg ~128pg,133pg, 59~64pg(벡터) , 72~76 pg (list )
+44~45pg( as/is 함수)
+
+지난 hw: 1~1000까지 3의 배수와 5의 배수를 한줄에
+10개씩 출력하고 마지막에 개수를 출력
+
+*프로그램 작성 절차
+1.문제 정의/이해
+2.기억장소 결정
+3.알고리즘 결정 =>제어구조 이용
+=>pseudo code
+1. 1 ~1000까지 반복
+1.1 3의 배수인지 판별
+1.2  5의 배수인지 판별
+1.3 3의배수이거나 5의 배수이면
+갯수를 세고, 그 수를 출력한다.
+2.갯수를 출력한다.
+====================================
+
+#1~1000까지 3의 배수와 5의 배수를 한줄에
+#10개씩 출력하고 마지막에 개수를 출력
+
+i <-1
+count <- 0
+linecount <- 1
+multiple3 <- NULL
+multiple5 <- NULL
+while( i <= 1000 ) {
+  multiple3 <- i %% 3
+  multiple5 <- i %% 5
+  if( multiple3 == 0 | multiple5 == 0 ) {
+    count <- count + 1
+    cat ( i , " ")
+    linecount <- linecount + 1
+    if (linecount > 10 ) {
+      linecount <- 1
+      print( "\n" )
+    }
+  }
+  i <- i + 1              #while 문은 이게 없으면 무한반복
+}
+print( "\n" )
+
+cat ( "1 ~ 1000 사이의 3의 배수와 5의 배수의 개수 : " , count, "\n")
+====================================================
+
+#
+#break/next
+#
+sum <- 0
+for ( i in 1:10) {
+  sum <- sum +  i
+  if ( i >= 5) {
+    break          # 반복을 빠져나가라
+      }
+}
+sum #15
+
+#next
+
+sum<-0
+for ( i in 1:10){
+  if ( i %% 2 == 0) {
+    next     #다시 반복 제어문으로 올라가기
+  }
+  sum <- sum + i
+}
+sum #25
+
+#2의배수를 제외하고 합계
+=============================================================
+
+*함수(Function)_단위(하나의) 기능을 수행하는 code 집합 (Block)
+>반복적인 기능을 별도로 작성하기 위해서 함수 작성
+1.내장함수 ( library 함수)_R에서 제공하는 함수_기본제공
+2.사용자 정의 함수 
+-제3자 함수_필요시 설치해서 사용
+-사용자 정의 함수
+
+cf)package:함수를 포함한 파일
+
+#
+#산술 내장 함수
+
+log ( 10 ) + 5        #로그함수 _ 로그함수 return값에 +5
+log ( 10, base = 2)   
+sqrt( 25)                   #제곱급(Square Root)
+max(5,3,2)              #가장 큰 수(
+min(5,3, 2)              #가장 작은 수
+abs( -10)                #절대값(absolute value)
+factorial(5)             #팩토리얼
+sin ( pi / 2 )             #삼각함수
+
+
+함수호출 => 'log(10)' => return 값 
+-log:함수명
+-인수 list : 10_ 항상 괄호 ! 0개이상
+-return 값 : 함수 동작 후 되돌려 주는 값 (항상 1개 or 0개)
+1.함수 정의_내장함수는 이미 정의 완료된 상태
+2.함수 호출
+
+
+
+*사용자 정의 함수 정의
+함수명 <- function ( [인수 list] ) {
+함수내용 code 작성
+return ( 되돌릴값)
+}
+리턴값은 항상 한개
+*함수 유형
+1. 인수없고, return 없는 경우
+2. 인수있고, return 없는 경우
+3. 인수없고, return  있는경우
+4. 인수있고, return  있는 경우
+
+=====================================
+#
+#사용자 정의 함수
+
+mymax <- function (x,y){            #함수정의
+  num.max <- x
+  if ( y > num.max ) {
+    num.max <- y
+  }
+  return ( num.max )
+}
+
+mymax( 10,15)                        #함수 호출
+[1] 15
+
+a <- 10
+b <- 5
+c <- 8
+max <- mymax ( a,b)
+max <- mymax ( max,c)
+max
+[1] 10
+=======================================
+
+
+#사용자 정의 함수 매개변수 초기값 설정
+
+mydiv <- function ( x, y = 2){              # 인수(y)의 default(2) 값 설정 , 초기값은 항상 오른쪽만 설정가능
+  result <- x/y
+  
+  return ( result)
+}
+
+mydiv ( x = 10 , y = 3 )     #[1] 3.333333
+mydiv ( 10,3 )                   #[1] 3.333333
+mydiv ( 10 )                       #[1] 5  _ y 값이 안들어왔을 때 default값 사용
+
+===========================================
+
+#외부 파일에 있는 함수 호출
+#함수 정의한 스크립트 생성 후 실행하기 
+
+setwd( "C:/workR")           #경로 지정
+source ( "mylib.R")          #lib파일(함수정의 script)지정_사용할파일
+
+#함수 호출
+my_max(10,5)
+my_div(10,2)
+
+============================================
+
+Scalar(원시값) : 하나의 값 ( 숫자 or 문자 or 논리 )
+
+scalar를 메모리에담기위해  변수 생성
+eg)a <- 10
+a는 10이라는 scalar를 담는 변수
+
+*Vector ( 1차원 배열, 열의 집합,동일 자료형 집합, scalar형 기억장소 집합 )
+
+eg)
+-1층 아파트  -> vector명
+101호 102호 103호 . . ._> index
+-A -> vector 명
+ 1,2,3,4,5 -> index
+
+R의 index는 항상 1부터 시작 
+python 의 index는 0부터 시작
+
+
+
+#
+#vector
+#
+
+#scalar 변수 사용
+a <-10
+b <- 5
+c<- 8
+max <- a
+if ( b> max ) { max <- b }
+if ( c > max ) { max <- c}
+max  [1] 10
+
+#vector 사용
+
+v <- c (10, 5, 8)
+max <- v [ 1 ]
+for ( i in 2:length (v) ) {
+  if ( v [ i ] > max  ) {
+    max <- v [ i]
+      }
+}
+
+max  [1] 10
+
+============================
+
+#vector 생성 _ c 함수
+ 
+x <- c ( 1,2,3 )               #[1] 1 2 3
+y <- c ( " a ", " b ", " c " ) #[1] " a " " b " " c "
+z <- c ( TRUE, TRUE , FALSE , TRUE ) #[1]  TRUE  TRUE FALSE  TRUE
+x;y;z
+      
+#class는 자료의 속성을 알려줌
+
+class ( x )  #[1] "numeric"
+class ( y )  #[1] "character"
+class ( z )  #[1] "logical"
+
+w <- c( 1, 2, 3, 'a','b','c')
+w
+class (w)       #[1] "character" #vector는 무조건 동일 자료형 !
+
+==================================
+#vector 생성 방법  " : "
+
+v1 <- 50:90
+v1
+v2 <-  c(1, 2, 3, 50:90)
+v2
+
+class ( v1 ) 
+class ( v2 )
+
+#vector 생성 방법seq (시작값, 끝값, 간격)
+
+  v3 <- seq (1, 101, 3 )     
+  v3
+  v4 <- seq ( 0.1,1.0,0.1)
+  v4
+  
+#vector 생성방법rep (1 , times = 반복횟수)  
+  
+  v5 <- rep ( 1, times = 5 )
+  v5
+  v6 <- rep ( 1:5, times =3 )
+  v6
+  v7 <- rep ( c ( 1 ,5 ,9), times =3 ) 
+  v7
+      
+
+
+
+  #벡터 원소값에 이름지정
+  #names 는 이름을 지정할 때 사용
+  # 이름 지정할 갯수와 벡터함수내 갯수 일치해야함
+  score <-  c ( 90, 85, 70 )  
+  names ( score )  #결과 : NULL
+  names ( score ) <- c ( "Hong", "Kim", "Lee" )  
+  names ( score ) #결과 : "Hong" "Kim"  "Lee"
+  score #결과 : Hong  Kim  Lee 
+  
+  
+  
+  #벡터 원소 접근
+  score [ 1 ]
+  score [ 2 ]
+  score [ 3 ]
+  score ["Hong"]
+  score [ "Kim"]
+  score [ "Lee"]
+  
+  d <- c (1,4,3,7,8)
+  d[1]  #1
+  d[2]  #4
+  d[3]  #3
+  d[4]  #7
+  d[5]  #8
+  d[6]  NA 
+   *NA _ 결측치 (missing value)_읽을 수 없다
+cf) NULL : 아무것도 없다
+      NAN(not a number) : 계산할 수 없다. 
+      inf(infinity) : 무한대
+
+=========================================================
+  for ( i in 1:length ( score )){      # score 함수 1부터 마지막까지를 나열
+    print ( score [i])
+  }
+  
+  score_names <- c ( "Hong", "Kim","Lee")
+  for ( i in 1 :length ( score)){
+    print (score [ score_names [i]])
+  }
+
+
+#벡터에서 여러 개의 값을 한번에 추출 _ ★실제에서 많이 쓰는 방법 ★
+  
+  d <- c( 1,4,3,7,8 )
+  d[ c ( 1,3,5 ) ]  #1번 3번 5번 인덱스 값 1 3 8
+  d[1:3]  # 1~3까지의 인덱스 값 1 4 3
+  d[ seq(1,5,2)]  # 1번 3번 5번 인덱스 값 1 3 8
+  d[-2]   #"-"는 제외의 의미  1 3 7 8
+  d[-c(3:5)]  # 3번4번5번 제외 1 4
+    
+GNP <- c( 2090, 2450 , 960 )
+GNP
+
+names ( GNP) <- c ( "Korea", "Japan" , "Nepal" )
+GNP
+
+GNP[1]
+GNP["Korea"]
+GNP[ c ( "Korea" , "Nepal" ) ]
+ 
+
+#result
+ > GNP[1]
+Korea 
+ 2090 
+> GNP["Korea"]
+Korea 
+ 2090 
+> GNP[ c ( "Korea" , "Nepal" ) ]
+Korea Nepal 
+ 2090   960  
+
+
+#백터 요소값 변경 ★
+
+v1 <- c(1, 5, 7, 8, 9 )   
+v1 #1 5 7 8 9
+
+v1[ 2 ]  <- 3
+v1 #1 3 7 8 9
+
+v1[ c (1,5) ] <- c(10,20)
+v1 # 10  3  7  8 20
+
+
+#벡터간 연산_동일 인덱스에 있는 값끼리 연산 
+# 두 벡터간 요소의 갯수가 같아야함
+
+x <- c (1,2,3)
+y <- c (4,5,6)
+> x + y
+[1] 5 7 9
+> x * y
+[1]  4 10 18
+> z <- x+y
+> z
+[1] 5 7 9
+
+
+
+
+#벡터에 적용가능한 함수
+
+d <- c(1,2,3,4,5,6,7,8,9,10)
+sum ( d )  # 합계
+sum( 2 * d )
+length ( d)            #벡터의 요소 개수(길이)
+mean( d [1:5])         #평균
+mean( d )
+median(d[1:5])                 #중앙값
+median ( d )
+max( d )                        #최대값
+min( d )                        #최소값
+sort( d )                       #정렬
+sort( d, decreasing = FALSE)
+sort( d, decreasing = TRUE )
+range(d)                       #값의 범위 (최소값~ 최대값)
+var( d )                      #분산
+sd ( d )                      #표준편차
+
+v <- sum( d ) / length( d )  #평균 구하는 방법
+v
+
+ #벡터에 논리 연산 적용★★★
+
+ d>= 5
+ [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
+ d[ d>5] 
+[1]  6  7  8  9 10
+
+ sum ( d > 5)   #갯수
+[1] 5
+
+ sum( d [ d>5]) #합계
+[1] 40
+ d == 5
+ [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+ 
+# cond <- d > 5 & d < 8 
+#cond
+ [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE
+
+ d[cond]
+[1] 6 7
+
+ all ( d > 5 ) #false _전체가 5보다 크냐 
+ any ( d > 5 ) #true_하나라도 5보다 크냐
+
+
+head ( d )   # 1 2 3 4 5 6  #default 값은 기본 6개 
+ tail ( d )   #5  6  7  8  9 10
+ head (d,3)   #1 2 3  # 갯수 지정
+ tail (d,2)   #9 10   # 갯수 지정 
+ 
+ x <- c ( 1,2,3)
+ y <- c (4,5,6)
+ z <- c (3,1,2)
+
+ w <- c(x,y)   # 벡터x와 벡터y 결합 
+ W
+ union(x,y)              #합집합
+ intersect(x,y)        #교집합
+ setdiff(x,y)             #차집합
+ setequal(x,y)         #x,y에 동일한 요소가 있는지 확인 #FALSE
+
+ 
+자료구조 
+Vector : 동일 자료형 기억장소 집합  
+List : 다른 datatype의 자료를 저장하는 구조 
+ -Key(변수) : value 형식으로 저장
+cf)Factor 형 :범위형 type ( 범위 지정 eg. 남/여 , 초/중/고급 , 예/아니오)
+
+
+
+ #LiST_ Key(변수명)와 index로 접근 모두 가능
+ 
+ ds <- c(90,85,70,84) #얘는 벡터
+ my.info <- list( name = 'Hong', age = 30 , status = TRUE, Score = ds)  
+ 
+ #name,age,status,score 가 KEY
+ # 각 값이 value
+ my.info         
+ my.info[ 1]              # 대괄호 1개는 인덱스 전체 
+ my.info [[1]]            #대괄호 2개는 value 값 도출
+ my.info$name             # Key이름 앞 $ 붙이기
+ my.info[[4]]             # 벡터 내용 전체
+ my.info[[4]] [1]         # 벡터 1번째 index
+
+#Factor형(범주형)
+bt <- c ( 'A', 'B', 'B','O','AB' ,'A') #bt는 벡터
+bt.new <- factor( bt )       #factor 형 벡터
+bt
+bt.new           # Levels: A AB B O _ Levels 는 가질 수 있는 값의 범위 
+bt [5]                #"AB"
+bt.new [5]          #AB
+levels ( bt.new )          #Level의 범위 값이 보고싶을 때 사용하는 함수 
+as.integer ( bt.new )           #정수로 변환해라 _as는 변환함수 _Level에 맞춰 숫자 변환
+bt.new [7] <-                 "B" 
+bt.new [8] <- "c"           #C는 Levels에 포함되지않기 때문에 에러 but 값이 생성됨
+bt.new
+         
+  
+
+
