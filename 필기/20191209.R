@@ -222,7 +222,7 @@ symbols(st$Illiteracy,st$Murder,        #원의 xy 좌표
 text(st$Illiteracy,st$Murder,           #텍스트출력 xy좌표
      rownames( st ),                    #출력할 text
      cex = 0.6,                         #폰트크기
-     col = "brown")            #폰트컬러
+     col = "brown")       #폰트컬러
 
 ##R 그래프 갤러리 : https://www.r-graph-gallery.com/index.html
 ##heatmap , map , 3d , spider 자주 사용됨 
