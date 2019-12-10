@@ -1,0 +1,309 @@
+
+#20191210
+#DAY 10 hw 
+#문제6번 _ 범주형이여야 그룹을 나눌 수 있다 _ 범례 위치 설정 보기
+#문제7번 _ 시간 정보는 선그래프를 자주 사용 
+#문제 8번 _1)
+#- us로 다시 데이터 프레임 설정해준 부분
+#- type = value  다시 보고 의미 확인 
+
+#데이터 유형에 따라 어떤 시각화 도구를 쓰는지 중요 
+
+##Open source
+#주의점
+#1.BUG가 존재 가능
+#2.저작권 확인 *
+#GPL,LGPL  :무료, 소스 공개 의무 O
+#APL,BSD,MPL : 소스 공개 의무 X
+
+
+
+##모자이크 함수
+#범주형 + 다중변수(= 두개이상의 범주형)일때 빈도수 확인시 모자이크 사용
+#https://www.rdocumentation.org/packages/mosaic/versions/1.5.0
+
+#mosaic plot
+#다중변수 범주형 데이터에 대한 각변수의 그룹별 비율을 '면적'으로 표시
+
+View(mtcars)
+str(mtcars)
+head(mtcars)
+mosaicplot( ~gear + vs,   #대상변수 ( ~x축 + y축 )
+           data = mtcars, #데이터셋
+           color = TRUE,  #Y축 변수의 그룹별 음영 다르게 표시 
+           main = "Gear and Vs") #제목
+# 색상 넣기 
+mosaicplot(~gear + vs , data = mtcars,
+           color = c( "green","blue"),
+           main = " Great and VS")
+
+#테이블 함수 만들고 그걸 모자이크플롯_ 데이터 자체가 교차형
+tbl <- table(mtcars$gear,mtcars$vs)
+tbl 
+
+mosaicplot(tbl,color = T, main = "gear and vs")   
+
+
+##차원 축소 (dimension reduction)
+#4차원 = > 3차원 차원축소시 데이터 손실
+#4차원은 표현하기 어렵기 때문에 차원축소 필요 
+#차원 축소 기법 : t -sne 기법
+
+install.packages("Rtsne")
+library(Rtsne)
+library(tidyverse)
+
+ds <- iris[ , -5 ]  #변수 4개에 대하여 표현 - 4차원
+ds
+
+##차원축소 
+#중복 데이터 제거 
+
+dup = which(duplicated (ds))
+dup #143  _ 143행에 중복데이터가 있다는 뜻
+
+ds <- ds[-dup,]  #중복데이터 제거 
+ds.y <- iris$Species[-dup] #품종에 대해서도중복데이터 제거 必_나중에 표현 해야
+ds.y
+
+##차원 축소 수행 - t-SNE 실행
+
+tsne <- Rtsne( ds,                 #차원축소 대상 데이터셋
+               dim = 2,         #축소할 차원 2or3차원
+               perplexity = 10 )  #데이터 샘플링을 수행할 샘플의 횟수는 :
+                      #(대상데이터수) /3 보다 작게 지정 :149 /3 보다 작은값
+
+tsne <- Rtsne(ds,dim = 2, perplexity = 10)
+tsne
+
+View(tsne)
+#차원축소시 데이터 손실은 발생하지만 4차원에대한 분석 불가능하기 때문에 감수
+
+#차원축소 결과 시각화 
+
+df.tsne <-  data.frame( tsne$Y )
+head( df.tsne )
+
+ggplot( df.tsne, aes( x= X1,y = X2 ,color = ds.y))+
+    geom_point( size =2)
+
+
+install.packages(c("rgl", "car"))
+library(car)
+library(rgl)
+library(mgcv)
+
+tsne <- Rtsne( ds, dims = 3, perplexity = 10)
+df.tsne <- data.frame(tsne$Y)
+head( df.tsne )
+
+scatter3d(x = df.tsne$X1, y = df.tsne$X2,
+          z = df.tsne$X3)
+ 
+points <-  as.integer(ds.y)
+color <- c("red","green","blue")
+scatter3d( x = df.tsne$X1, y = df.tsne$X2,
+           z= df.tsne$X3,
+           point.col = color[points],
+           surface  = FALSE)
+
+#고차원 데이터의 차원 축소와 시각화 방법
+#https://skyeong.net/186
+
+
+#머신러닝 - 분류
+#         - 회귀
+#         - 군집분류
+
+
+#API_ Application Programing Interface
+#대부분 시간데이터를 가진것이 api사용_계속적으로 업데이트를 할수없기때문
+#google map _ https://cloud.google.com/maps-platform/#get-started
+#위에서 API KEY 받기 
+
+
+
+##공간시각화
+
+#Google map 사용 
+#
+#절차
+#1.R최신버전 설치
+#2.ggplot2최신버전 설치
+#3.ggmap 설치
+#4.구글맵을 사용하기 위한 API Key 획득
+#5.구글맵을 이용한 공간 시간화 수행
+
+intall.packages("ggmap")
+library(ggmap)
+register_google(key = "AIzaSyBW1-gQiLvNeJ3_pTZnF_rhU3sxbIPHC9c")
+
+#geocode : 특정 지점의 경도(lon)/위도(lat)를 알려주는 함수 
+#tibble 형식으로 나옴 _ data.frame과 비슷 _ 직접 사용 x
+gc <- geocode(enc2utf8("제주"))  #enc문자를 utf8로 encoding
+gc
+
+#경도/위도를 숫자로 변환 必
+cen <- as.numeric(gc) 
+cen
+
+##지도표시 
+map <- get_googlemap(center = cen) #지도 중심형 좌표 
+ggmap(map)          #경도 위도를 알경우 c(경도, 위도)
+
+
+gc <- geocode(enc2utf8("한라산"))
+cen <- as.numeric((gc))
+map <- get_googlemap(center = cen,        #지도 중심점 좌표
+                     zoom = 10,           #지도 확대 청도
+                     size = c(640,640),   #지도크기
+                     maptype = "roadmap") #지도유형 _ hybrid 유형 有
+ggmap(map)
+
+
+#R에서는 경도,위도  
+#Google 에서는 위도,경도 순서 
+
+
+cen <- c(126.561099,33.253077)
+map <- get_googlemap( center = cen ,
+                      zoom =17,
+                     maptype = "roadmap")
+ggmap(map)
+
+##지도에 marker 표시하기
+
+gc <- geocode(enc2utf8("제주"))
+cen <- as.numeric(gc)
+map <- get_googlemap(center = cen,
+                     maptype = "roadmap",
+                     marker = gc)
+ggmap(map)
+
+
+names <- c("용두암", "성산일출봉" ,"정방폭포",
+           "중문관광단지","한라산1100고지","차귀도")
+
+addr <- c("제주시 용두암길 15",
+          "서귀포시 성산읍 성산리",
+          "서귀포시 동흥동 289-3",
+          '서귀포시 중문동 2624-1',
+          '서귀포시 색달동 산1-2',
+          '제주시 한경면 고산리 125')
+
+gc <- geocode( enc2utf8(addr))
+gc
+
+##관광지 명칭과  좌표값으로  data frame 생성
+
+df <- data.frame(name = names , lon = gc$lon, lat = gc$lat)
+df
+   #경도와 위도의 평균값을 지도의 중심값으로 
+cen <- c(mean(df$lon),mean(df$lat)) 
+
+map <- get_googlemap(center = cen , 
+                     maptype = "roadmap",
+                     zoom = 10,
+                     size = c(640,640),
+                     marker = gc  )  #gc에는 위도 경도 값이 들어가 있음 
+ggmap(map)
+
+
+##지도에 관광지 이름 추가
+gmap <-  ggmap(map)
+gmap +
+    geom_text(data = df,             #데이터 셋
+              aes(x = lon, y = lat), #텍스트 위치
+              size = 5,              #텍스트 크기
+              label =df$name)        # 텍스트 이름 
+
+
+###바람 데이터를 지도에 표시하기 
+##지도에 데이터 표시
+
+dim(wind)
+
+str( wind)
+
+sp <- sample( 1:nrow(wind) , 50)   #50 개 샘플링 
+df <- wind[sp,]
+head(df)
+
+
+cen <- c(mean(df$lon),mean(df$lat)) #지도중심점 설정
+gc <- data.frame(lon = df$lon, lat = df$lat) 
+head(gc)
+    
+##지도에 marker  표시                      
+map <-  get_googlemap(center = cen ,
+                      maptype = "roadmap",
+                      zoom = 6,
+                      marker = gc)
+ggmap(map)
+
+
+##바람 속도를 지도에 원크기로 표시하기 
+
+map <-  get_googlemap(center = cen ,
+                      maptype = "roadmap",
+                      zoom = 6 )  #marker은 필요없으니 제거
+
+
+#alpha:투명도 
+#size = spd 사이즈는 바람의 spd로 하겠다
+#원의크기 조절 ( 1부터 14범위로 원의크기 지정)
+
+gmap <- ggmap(map)
+gmap + 
+    geom_point ( data = df, 
+                 aes( x = lon , y = lat, size = spd), 
+                 alpha = 0.4 , col = "blue")+
+    scale_size_continuous(range = c(1,25)) 
+
+
+#단계 구분도 
+install.packages("ggiraphExtra")
+library(ggiraphExtra)
+
+dim(USArrests)
+str(USArrests)
+head(USArrests)
+
+library(tibble)
+
+crime <- rownames_to_column(USArrests, var = "state")
+crime$state <- tolower(crime$state)
+str(crime)
+
+install.packages("mapproj")
+library(mapproj)
+
+state_map <- map_data( "state")
+str(state_map)
+ggChoropleth(data = crime,
+             aes(fill = Murder,
+                 map_id = state),
+             map = state_map)
+
+
+##한국행정지도를 이용하여 단계구분도
+##http://rpubs.com/cardiomoon/222145
+
+install.packages("devtools")
+devtools::install_github("cardiomoon/kormaps2014")  #devtool은  git hub 에 접근하기 위한 함수 
+devtools::install_github("cardiomoon/moonBook2")  #한국 지도가 git hub에 올려져있음 
+library(kormaps2014)
+library(moonBook)
+areacode
+
+
+library(ggplot2)
+theme_set(theme_gray(base_family="NanumGothic"))
+
+ggplot(korpop2,aes(map_id=code,fill=총인구_명))+
+    geom_map(map=kormap2,colour="black",size=0.1)+
+    expand_limits(x=kormap2$long,y=kormap2$lat)+
+    scale_fill_gradientn(colours=c('white','orange','red'))+
+    ggtitle("2015년도 시도별 인구분포도")+
+    coord_map()
+
