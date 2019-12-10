@@ -33,9 +33,9 @@ ggplot(df,aes(x = month, y = rain))+  #aes안에 x와 y 좌표 설정해주기 _
              fill = "steelblue")  # 그래프 채움 색 
 
 ##가로 그래프 
-#ggtile < 제목 설정
+#ggtitle < 제목 설정
 #labs  x,y축 이름 설정
-#theme  ggtile의 테마
+#theme  ggtitle의 테마
 #coord_flip()  그래프를 옆으로 눕혀라 
 
 ggplot(df,aes( x = month, y = rain))+
@@ -57,7 +57,8 @@ ggplot(iris, aes( x = Petal.Length))+
 #fill에다가 종류별로 색을 넣기 위해서 _  iris의 Species 는 범주형 
 #color는 막대의 경계선의 색 
 #position 품종별로 한그래프에 그릴지,각각 그릴지 _ dodge는 따로 그리는 명령
-#legend.position은 범례의 위치 
+#legend.position은 범례의 위치 = ↓
+#guides( fill = guide_legend( title = "실린더수" ) ) 
 
 ggplot( iris, aes( x= Sepal.Width, fill = Species , 
                    color=Species )) +
@@ -122,7 +123,7 @@ str(economics)
 ##사선
 #intercept : y 절편 값
 #slope :기울기 
-#abline :사선을 그을 때 쓰는 함수 
+#abline :사선을 그을 때 쓰는 함수 _회귀선 구하는 식이 따로 존재 
 ggplot( economics, aes( x= date, y = psavert))+
     geom_line() + 
     geom_abline( intercept = 12.18671,

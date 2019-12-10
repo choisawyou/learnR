@@ -5,7 +5,9 @@
 *수치정보와 그에대한 해석이 필요( 단순 그래프 나열 x)
 *그래프 부가설명이 ppt에 간략하게_자료만 보는 사람을 고려
 
-Markdown 형식_보고서 작성
+Markdown 형식_보고서 작성에 용이한 툴
+
+=============================================
 
 ##20191209 10일차 
 
@@ -42,7 +44,7 @@ ggplot(df,aes(x = month, y = rain))+  #aes안에 x와 y 좌표 설정해주기 _
              fill = "steelblue")  # 그래프 채움 색 
 
 ##가로 그래프 
-#ggtile < 제목 설정
+#ggtitle < 제목 설정
 #labs  x,y축 이름 설정
 #theme  ggtile의 테마
 #coord_flip()  그래프를 옆으로 눕혀라 
@@ -200,7 +202,7 @@ view(GNI2014)
 treemap( GNI2014, index = c( 'continent', 'iso3'), #계층구조_ 대륙 밑에 국가별로 계층화해라 
 vSize ='population',                               #타일크기_ 인구가 많으면 타일이 크게해라
 vColor = 'GNI',                                    #타일색깔_ GNI에 따라 색을 결정 
-type = 'value',                                    #타일컬러링방법_ vcolor에서 정한 데이터의 value를 통해 
+type = 'value',                                    #타일컬러링방법
 bg.labels = 'yellow',                              #레이블배경색_ 글씨 배경색
 title = "World's GNI")                             #제목
 
@@ -231,7 +233,7 @@ symbols(st$Illiteracy,st$Murder,        #원의 xy 좌표
 text(st$Illiteracy,st$Murder,           #텍스트출력 xy좌표
      rownames( st ),                    #출력할 text
      cex = 0.6,                         #폰트크기
-     col = "brown")       #폰트컬러
+     col = "brown")            #폰트컬러
 
 ##R 그래프 갤러리 : https://www.r-graph-gallery.com/index.html
 ##heatmap , map , 3d , spider 자주 사용됨 
