@@ -236,71 +236,55 @@ library(psych)
 require(descr)
 library(ggmap)
 register_google(key = "AIzaSyBW1-gQiLvNeJ3_pTZnF_rhU3sxbIPHC9c")
-
-
 getwd()
-setwd("C:/Bigdata Maestro/learnR")
+setwd("C:/learnR")
 acc <- read.csv(file ="도로교통공단_시도_시군구별_월별_교통사고(2018).csv")
 head(acc)
 View(acc)
-
-ac <- subset(acc, 시도 == "서울" , select = c(시군구,월,발생건수))
-ac
-
-nrow(ac)
+ac <- subset(acc, 시도 == "서울" , select = c(시군구,월,발생건수)) ; ac
 ac.1 <- ac %>% 
     group_by(시군구) %>%
-    filter(시군구 == "종로구")
-     
+       summarise(total = sum(발생건수))
+
 ac.1
+ac.c <- as.character(ac.1$시군구);ac.c
+gc <- geocode(enc2utf8(ac.c)) ; gc#숫자로 변환?
+cen <- c(mean(gc$lon),mean(gc$lat));cen
 
+map <- get_googlemap(center = cen ,
+                     maptype = "roadmap",
+                     zoom =12,
+                     size =c(800,800)   )
+ggmap(map)
 
-    head(ac.1)
-table(ac.1)
-
-df %>% 
-    group_by( class ) %>% 
-    summarise( mean_math = mean ( math ),
-               mean_english = mean (english),
-               mean_science = mean ( science),
-               n = n () )  # n = n (인수없음) => 빈도수 계산하는 함수 
-
-
-
-
-
-
-
-
+gmap <- ggmap(map)
+gmap+geom_point(data = ac.1,
+                aes(x= gc$lon,y =gc$lat , size = ac.1$total),
+                alpha = 0.4 , col = "red")+
+    scale_size_continuous(range = c(1,20))
+    
 #문8)
 #7번과 동일한 자료를 이용하여 제주시 1년 교통사고 발생건수를 지도상에 원의 크기로 나타내시오.
 
-head(acc)
 
-ja <- subset(acc,시도 == "제주", select = c(시군구,월,발생건수))
-ja
-cnt <- ja$발생건수
-cnt
-ja.jj <- sum(cnt[1:12])
-ja.sg <- sum(cnt[13:24])
+aj <- subset(acc, 시도 == "제주" , select = c(시군구,월,발생건수)) ; aj
+aj.1 <- aj%>% 
+    group_by(시군구) %>%
+    summarise(total = sum(발생건수)) ; aj.1
 
-names <- c("제주시","서귀포시")
-cnt.j <- c(ja.jj,ja.sg)
-
-jac <- data.frame(name = names, acc.cnt = cnt.j)
-jac
-
-gc <- geocode(enc2utf8(names))
+aj.c <- as.character(aj.1$시군구)
+aj.c
+gc <- geocode(enc2utf8(aj.c))
 cen <- c(mean(gc$lon),mean(gc$lat))
-cen
 
-map <- get_googlemap(center = cen,maptype = "roadmap",
-                     zoom = 11,
-                     marker =gc)
+map <- get_googlemap(center = cen ,
+                     maptype = "roadmap",
+                     zoom =11,
+                     size =c( 800,800))
 gmap <- ggmap(map)
-
 gmap+
-    geom_point(data = jac ,
-               aes( x = 126.54563 , y = 33.37687, size = jac$acc.cnt),
-               alpha = 0.4 , col = "red")+
-    scale_size_continuous(range = c(1,10)) 
+    geom_point(data =aj.1,
+               aes(x= gc$lon,y =gc$lat, size = aj.1$total ),
+               alpha =0.3 , col = "black")+
+    scale_size_continuous(range = c(10,25))
+    
