@@ -142,7 +142,7 @@ register_google(key = "AIzaSyBW1-gQiLvNeJ3_pTZnF_rhU3sxbIPHC9c")
 gc <- geocode(enc2utf8("제주"))  #enc문자를 utf8로 encoding
 gc
 
-#경도/위도를 숫자로 변환 必
+#경도/위도를 숫자로 변환 必 _ tibble은 frame 형식이라서 숫자로 변환 
 cen <- as.numeric(gc) 
 cen
 

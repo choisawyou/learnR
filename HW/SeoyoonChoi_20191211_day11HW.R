@@ -48,19 +48,14 @@ dim(swiss)
 str(swiss)
 View(swiss)
  which(duplicated(swiss))
-
-
 sw.2 <- Rtsne(swiss,dim =2 , perplexity = 15 )#2차원 산점도
 sw.3 <- Rtsne(swiss,dim =3 , perplexity = 15 )#3차원 산점도 
-
 df.2 <- data.frame(sw.2$Y)
 df.2
 ggplot(df.2,aes(x=X1,y=X2))+
     geom_point(size = 3)
-
 df.3 <- data.frame(sw.3$Y)
 df.3
-
 scatter3d(x = df.3$X1, y = df.3$X2, z = df.3$X3)
 
 
@@ -90,22 +85,17 @@ kkmt
 
 km <- as.numeric(kkmt)
 km
-
 km.map <- get_googlemap(center = km ,
                         zoom = 8,
                         size = c(500,500),
                         maptype = "hybrid")
-
-
 ggmap(km.map)
 
 #(3) 강남역 근방으로 지도 크기는 640x640, 지도 유형은 roadmap, zoom은 16인 지
 #도를 출력하시오.
 gnst <- geocode(enc2utf8("강남역"))
-
 gs <- as.numeric(gnst)
 gs
-
 gs.map <- get_googlemap(center = gs,
                         zoom = 16,
                         size = c(640,640),
@@ -114,12 +104,10 @@ ggmap(gs.map)
 
 #(4) 지도 유형은 roadmap, zoom은 9인 경도 127.397692, 위도 36.337058 지역의 지
 #도를 출력하시오.
-
 map.4 <- get_googlemap(center = c(127.397692,36.337058),
                      zoom = 9 ,
                      size = c(640,640),
                      maptype = "roadmap")
-
 ggmap(map.4)
 
 #(5) 지도 유형은 roadmap, zoom은 10인 경도 135.502330, 위도 34.693594 지역의
