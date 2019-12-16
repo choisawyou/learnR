@@ -1,6 +1,7 @@
 #최서윤
 #작성일 : 20191211-20191212
 #제출일 : 20191212
+Sys.setenv( JAVA_HOME = 'C:/Program Files/Java/jre1.8.0_231' )
 
 install.packages("wordcloud")     #word cloud
 install.packages("wordcloud2")    #word cloud

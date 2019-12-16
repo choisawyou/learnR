@@ -1,0 +1,52 @@
+20191216  13회차
+
+DAY12 HW answer checking
+
+Sys.setenv( JAVA_HOME = 'C:/Program Files/Java/jre1.8.0_231' )_ 자바 실행환경 위치 지정 필요 
+library( wordcloud ) 
+library( KoNLP ) _ 한글 사전
+library( RColorBrewer )  _ 색상 팔레트
+
+카카오톡이나 sns는  API를 통해 텍스트마이닝 진행
+ 사용하는 사전마다 사전에 포함된 단어 수가 다르다 
+
+사전 사용 법 
+use+사전이름_KoNLP내부 사전 사용시 
+buildDictionary_외부사전 사용시
+====================================================
+
+#20191216  14일차
+
+#문제정의 
+#   ↓
+#자료수집
+#   ↓
+#자료전처리
+#   ↓
+#탐색적data 분석 (data이해)   →  분석보고서 or 
+#   ↓
+#data model →   →   →   →   →   →     ↑   
+# - 예측
+# - 분류
+# - 군집화 
+
+#data model은 꼭 해야되는 과정은 아니지만
+#이를 통해 data를 예측/분류/군집화를 하는데 도움을 줄 수 있음 
+
+#Modeling : Model을 만들어 내는 과정
+#Data Modeling => 현실 세계를 표현하는 수식을 도출하는 과정 
+#수식 _data model _ 통계적 관점
+#대표적 수식 : y= wx + b   _ x에의해서 y의 값을 예측
+# y : 반응변수 ( Lable , 정답) 
+# x : 독립변수 ( 특성 )
+# w,b : 계수 , 매개변수 _Data modeling은 이 계수를 찾는 과정 
+# w(weight) : 기울기 b(bias) : 경향_둘다 상수 
+
+#Model 과정
+#1.Model 선택 : 수식 결정 eg) y=wx+b
+#2.실제 data(x,y)를 이용하여 w,b 값을 결정 / 훈련하는 과정 
+#3.실제 data를 통한 예측 
+#4.Model 평가 _오차가 적을수록 model의 성공률 ↑
+
+
+#단순선형 회귀분석 ( simple linear regression analysis )

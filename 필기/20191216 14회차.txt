@@ -1,0 +1,15 @@
+20191216  13회차
+
+DAY12 HW answer checking
+
+Sys.setenv( JAVA_HOME = 'C:/Program Files/Java/jre1.8.0_231' )_ 자바 실행환경 위치 지정 필요 
+library( wordcloud ) 
+library( KoNLP ) _ 한글 사전
+library( RColorBrewer )  _ 색상 팔레트
+
+카카오톡이나 sns는  API를 통해 텍스트마이닝 진행
+ 사용하는 사전마다 사전에 포함된 단어 수가 다르다 
+
+사전 사용 법 
+use+사전이름_KoNLP내부 사전 사용시 
+buildDictionary_외부사전 사용시
