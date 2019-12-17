@@ -19,7 +19,7 @@
 #Modeling : Model을 만들어 내는 과정
 #Data Modeling => 현실 세계를 표현하는 수식을 도출하는 과정 
 #수식 _data model _ 통계적 관점
-#대표적 수식 : y= wx + b   _ x에의해서 y의 값을 예측
+#대표적 수식 : y= wx + b   _ x에의해서 도출되는 y의 값을 예측
 # y : 반응변수 ( Lable , 정답) 
 # x : 독립변수 ( 특성 )
 # w,b : 계수 , 매개변수 _Data modeling은 이 계수를 찾는 과정 
