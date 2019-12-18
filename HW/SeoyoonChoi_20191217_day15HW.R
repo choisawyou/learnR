@@ -29,10 +29,16 @@ residuals(model.tree)
 
 model.mt <- lm(mpg~.,data = mtcars) ; model.mt
 
-mtcars$mpg =  12.30337 + (-0.11144 * mtcars$cyl) +( 0.01334 *mtcars$disp )
-      + (-0.02148 * mtcars$hp )  + ( 0.78711 * mtcars$drat) +(-3.71530 * mtcars$wt)
-      + ( 0.82104 * mtcars$qsec) + (0.31776 * mtcars$vs)  +( 2.52023  * mtcars$am)
-      + (0.65541  * mtcars$gear) + (-0.19942 * mtcars$carb)
+mtcars$mpg =  12.30337 + (-0.11144 * mtcars$cyl) +
+    ( 0.01334 * mtcars$disp) + 
+    (-0.02148 * mtcars$hp )  + 
+    ( 0.78711 * mtcars$drat) +
+    (-3.71530 * mtcars$wt)   + 
+    ( 0.82104 * mtcars$qsec) + 
+    (0.31776  * mtcars$vs)   +
+    ( 2.52023 * mtcars$am)   + 
+    (0.65541  * mtcars$gear) + 
+    (-0.19942 * mtcars$carb)
 
 summary(model.mt)
 

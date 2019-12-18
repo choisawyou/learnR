@@ -100,7 +100,7 @@ summary(model3)  #model2보다 model3의  Adjusted R-squared값(설명력)이 �
 #Logistic Regression(로지스틱 회귀분석)
 #
 #회귀모델에서 종속 변수의 값의 형태가 범주형인 경우 
-#예측모델
+#분류예측모델
 #
 #주어진 data로부터 어떤 범주를 에측하는 분야를
 #회귀와 구분하여 분류(classification)이라고 한다. 
