@@ -54,7 +54,6 @@ View(age.1834)
 year <- 2013:2018 ;cnt <- c(23547,24767,25512,27553,27607,27635)
 df <- data.frame(year,cnt)
 View(df)
->>>>>>> 2ff41f57d6ab9a69e7bded8e7e4edc45fec8a584
 
 ggplot(df,aes(x=year, y = cnt))+
   geom_line(col = "orange", lwd =2)+
@@ -64,3 +63,80 @@ ggplot(df,aes(x=year, y = cnt))+
                                    colour = "Orange"))+
   labs(x = '년도' , y = '전입 청년인구 수')
 
+
+#제주 산업별 매출액 16-17
+
+setwd("C:/Bigdata Maestro/learnR/project/FinalTeamPRJ")
+income <- read.csv("제주산업별 매출액16-17.csv",header = F,as.is = T)
+View(income)
+colnames(income) <- c('지역','산업','2016','2017')
+rownames(income) <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+
+#숫자변환
+income <- income[-c(1:2),]
+income$`2016` <- as.numeric(income$`2016`)
+income$`2017` <- as.numeric(income$`2017`)
+
+
+ab <- t(income)
+View(ab)
+ab <- ab[-1,]
+value <- income[,-c(1:2)]
+View(value)
+#========================================================================
+colnames(ab) <- c('t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14','t15','t16','t17','t18','t19','t20')
+#rownames(value) <- c('농업, 임업 및 어업','광업','제조업',' 전기, 가스, 증기 및 공기조절 공급업',
+#                     '수도, 하수 및 폐기물 처리, 원료 재생업','건설업','도매 및 소매업', '운수 및 창고업',
+#                     '숙박 및 음식점업','정보통신업','금융 및 보험업','부동산업','전문, 과학 및 기술 서비스업',
+#                     '사업시설 관리, 사업 지원 및 임대 서비스업','공공행정, 국방 및 사회보장 행정','교육 서비스업',
+
+ab <- as.numeric(ab)
+
+year <- 2016:2017
+t1 <- c(42584621,46007807) #전체
+t2 <- c(576442,585443) #농업
+t3 <- c(84910,63468) #광업
+t4 <- c(84910,63468) #
+t5 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #  
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) #
+t1 <- c(84910,63468) 
+
+df <- data.frame(year,t1)
+
+
+df2 <- data.frame(year,t2)
+
+#df <- data.frame(year,a)
+##abline :사선을 그을 때 쓰는 함수 
+par(mfrow = c(1,2)) 
+
+ggplot(df,aes(x=year, y =t1 ))+
+         geom_line()
+       
+
+ggplot(df2,aes(x=year, y =t2 ))+
+  geom_line()
+#========================================================================
+str(income)
+inc <- income %>% 
+  mutate(ratio= income$`2016` / income$'2017')
+View(inc)
+
+inc.d <- inc %>% arrange(desc(ratio)) #내림차순 
+View(inc.d)
