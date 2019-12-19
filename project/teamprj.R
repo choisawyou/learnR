@@ -1,7 +1,11 @@
 #Team PRJ
 library(dplyr)
 library(ggplot2)
-setwd("C:/workR/learnR/project/FinalTeamPRJ/인구")
+setwd("C:/Bigdata Maestro/learnR/project/FinalTeamPRJ/인구")
+
+
+
+
 pop <- read.csv("시도 각 세별 이동자수 13-18.csv",header = F,as.is = T)
 pop
 str(pop)
@@ -66,11 +70,10 @@ ggplot(df,aes(x=year, y = cnt))+
 
 #제주 산업별 매출액 16-17
 
-setwd("C:/workR/learnR/project/FinalTeamPRJ")
+setwd("C:/Bigdata Maestro/learnR/project/FinalTeamPRJ")
 income <- read.csv("제주산업별 매출액16-17.csv",header = F,as.is = T)
 View(income)
 colnames(income) <- c('지역','산업','2016','2017')
-rownames(income) <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
 
 #숫자변환
 income <- income[-c(1:2),]
@@ -117,12 +120,12 @@ df.6 <- data.frame(c,a);df
 
 ggplot(df.6,aes(x = c, y = a ))+
   geom_bar(stat = "identity" ,  fill = 'orange') + 
-  ylim(-50,1150)+
+  ylim(-100,1150)+
   ggtitle('제주 2016산업별 매출액')+
   theme(plot.title = element_text( size =25,
                                    face = 'bold',
                                    color ='orange'))+
-  theme_minimal() +
+  theme_classic() +
   theme(plot.margin = unit(rep(-2,4), "cm"))+
   coord_polar(start = 0) 
 
@@ -140,7 +143,7 @@ ggplot(df.7,aes(x = c, y = b ))+
   theme(plot.title = element_text( size =25,
                                    face = 'bold',
                                    color ='orange'))+
-  theme_minimal() +
+  theme_classic() +
   theme(plot.margin = unit(rep(-2,4), "cm"))+
   coord_polar(start = 0) 
 
@@ -153,16 +156,15 @@ ggplot(ratio,aes(x = reorder(c,r) , y = r)) +
   geom_bar(stat = "identity")+ 
   
              coord_cartesian(ylim=c(0.6, 1.4))+
-  geom_col(fill = ifelse(ratio$c %in% c('숙박 및 음식점업','도매 및 소매업' ,'운수 및 창고업'),
-                                        'grey','orange'))+ theme_classic() +
+  geom_col(fill = ifelse(ratio$c %in% c('숙박 및 음식점업','도매 및 소매업' ,'부동산업','운수 및 창고업'),
+                                        'grey','orange'))+ theme_void() +
    ggtitle('산업별 매출 증가 비율')+
     theme(plot.title = element_text(size =25,
                                   face = "bold",
                                   colour = "orange"))+ 
   labs(x = '',y = '증가율')+
   geom_hline(yintercept = mean( ratio$r),color = 'navy',size = 1) 
-#+
-  geom_text(hjust=-.1, check_overlap=TRUE) 
+ # geom_text(hjust=-.1, check_overlap=TRUE) 
 
 
 #손익분기점 초과 시점
@@ -199,11 +201,19 @@ str(b)
 b <- data.frame(b)
 
 
-t5 <- c(9.2,9.8,10.7,9.0)
-t12 <- c(7.5,8.4,8.6,8.4)
-t13 <- c(8.3,7.7,8.0,7.8)
-t15 <- c(8.1,8.3,9.3,7.9)
-t16 <- c(8.1,8.6,8.8,8.1)
+#t5 <- c(9.2,9.8,10.7,9.0)#출판,영상,방송통신 및 정보서비스업
+#t12 <- c(7.5,8.4,8.6,8.4) #숙박 및 음식
+#t13 <- c(8.3,7.7,8.0,7.8) #금융 및 보험업
+#t15 <- c(8.1,8.3,9.3,7.9)#하수폐기물 처리, 원료재생 및 환경복원업
+#t16 <- c(8.1,8.6,8.8,8.1)#교육서비스업
+
+t1 <- c(7,6.4,6,5.9)# 운수업
+t2 <- c(8.2,7.7,7.8,7.8) #도소매
+t3 <- c(7.5,8.4,8.6,8.4)#숙박 및 음식
+t4 <- c(9.3,8.3,8.6,8.7) #임대(부동산)
+t6 <- c(9.9,9.8,10,10.5) #전문, 과학 및 기술 서비스업
+
+
 
 year <- c(2015:2018)
 df <- data.frame(year,t5,t12,t13,t15,t16)
@@ -217,11 +227,11 @@ View(df)
 
 g <- ggplot(df)
 g + 
-  geom_line(aes(x = year,y = t5),color = 'red',lwd =2)+
-geom_line(aes(x = year,y = t12),color = 'orange',lwd =2)+
-geom_line(aes(x = year,y = t13),color = 'yellow',lwd =2)+
-geom_line(aes(x = year,y = t15),color = 'green',lwd =2)+
-geom_line(aes(x = year,y = t16),color = 'blue',lwd =2) +theme_classic()+ 
+  geom_line(aes(x = year,y = t1),color = 'brown',lwd =2)+ #운수 파랑
+geom_line(aes(x = year,y = t2),color = 'orange',lwd =2)+
+geom_line(aes(x = year,y = t3),color = 'yellow',lwd =2)+
+geom_line(aes(x = year,y = t4),color = 'green',lwd =2)+
+geom_line(aes(x = year,y = t6),color = 'blue',lwd =2) +theme_classic()+
   ggtitle("산업별 손익분기점 달성기간")+
   theme(plot.title = element_text( size =25,
                                    face = 'bold',
@@ -229,3 +239,4 @@ geom_line(aes(x = year,y = t16),color = 'blue',lwd =2) +theme_classic()+
   
                            
 str(df)                        
+#운수업 파랑색 #도소매 주황 #숙박및 음식 노랑 #임대부동산 초록 # 전문 과학 및 기술 서비스 업 은 파랑색
