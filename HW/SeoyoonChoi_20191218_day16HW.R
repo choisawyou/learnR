@@ -19,6 +19,8 @@ st
 fit <- kmeans(x = st,center = 5)
 fit
 
+clusplot( st, fit$cluster, color = TRUE, shade = TRUE, labels = 2, lines = 0 )
+
 #문2)
 #mlbench 패키지에서 제공하는 Sonar 데이터셋에 대해 k-평균 군집화를 실시하고 결과를 그래프로 출력하시오.
 

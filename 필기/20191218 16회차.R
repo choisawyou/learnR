@@ -18,7 +18,14 @@
 #2.분류 예측(logistic regression)
 #3.분류  
 # => 1)KNN  2)K means  3)Decision tree  4)Random forest  5)Suppot vector machine(svm)
+#K FOLD는 알고리즘이 아닌 검증하는 용 
 ##===================================================================================##
+#cf)
+##neural network_ 최근 각광받는 알고리즘 
+# cnn : 영상 / image
+# rnn : 자연어 처리 ; 챗봇
+# dnn : 영상  ; 자율 주행
+# can : 이미지 합성 ; 자동 그림그리기 
 
 ##지도학습모델 ( supervised  learning model ) _ 예측과 분류 ##
 # =>학습 data에 답이포함 (독립변수(feature),종속변수(label) 모두 존재 )
@@ -30,6 +37,7 @@
 # => 학습 data에 답이 미포함 (only 독립변수)
 #대상 알고리즘 : K-means(평균)
 
+##강화학습모델 : eg)알파고 
 
 ####군집화(clustering) / 분류 (classfication)####
 
